@@ -8,6 +8,15 @@ public class Photo {
 
     //raw data
 
+    // empty constructor
+    public Photo() {
+    }
+    // constructor
+    public Photo(String id, String fileName) {
+        this.id = id;
+        FileName = fileName;
+    }
+
     public String getId() {
         return id;
     }
