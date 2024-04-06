@@ -35,7 +35,7 @@ public class PhotozController {
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
-    // Delete onw specific photo
+    // Delete one specific photo
     @DeleteMapping ("/photoz/{id}")
     public void   delete(@PathVariable String id){
         Photo photo = db.remove(id);
