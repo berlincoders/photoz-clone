@@ -1,10 +1,7 @@
 package com.berlincoders.romeo.photoz.clone;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
@@ -25,16 +22,25 @@ public class PhotozController {
     public String hello() {
         return "Hello world";
     }
-    //Adding endpoint
+    //Adding endpoint All the photos
     @GetMapping ("/photoz")
     public Collection<Photo> get(){
      return db.values();
     }
 
+    // specific photo
     @GetMapping ("/photoz/{id}")
     public Photo  get(@PathVariable String id){
         Photo photo = db.get(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return photo;
     }
+    // Delete onw specific photo
+    @DeleteMapping ("/photoz/{id}")
+    public void   delete(@PathVariable String id){
+        Photo photo = db.remove(id);
+        if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+
 }
