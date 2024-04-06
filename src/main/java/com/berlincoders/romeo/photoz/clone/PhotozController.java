@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PhotozController {
 
-    private List<Photo> db = List.of(new Photo());
+    private List<Photo> db = List.of(new Photo("1","hello.jpg"));
 
     @GetMapping("/")
     public String hello() {
@@ -19,5 +19,6 @@ public class PhotozController {
     @GetMapping ("/photoz")
     public List<Photo>  get(){
 
+     return db;
     }
 }
