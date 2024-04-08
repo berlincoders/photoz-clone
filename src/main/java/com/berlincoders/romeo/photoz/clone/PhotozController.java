@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 
@@ -36,10 +33,19 @@ public class PhotozController {
         return photo;
     }
     // Delete one specific photo
+    //Ask the frontedn to send it some json, and spring boot will convert to a photo objet.
     @DeleteMapping ("/photoz/{id}")
     public void   delete(@PathVariable String id){
         Photo photo = db.remove(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    // Post mapping
+    @PostMapping Mapping ("/photoz/")
+    public void   create(@RequestBody Photo photo){
+        // We should generate the ID.
+        photo.setId(UUID.randomUUID().toString());
+        db.put(photo.getId(), photo);
     }
 
 
