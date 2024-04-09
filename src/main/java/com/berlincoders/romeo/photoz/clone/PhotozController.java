@@ -1,6 +1,7 @@
 package com.berlincoders.romeo.photoz.clone;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -45,7 +46,7 @@ public class PhotozController {
    // should convert that json to an Object, (Photo object defined before as a Model), and we can handle the object directly
 
     @PostMapping ("/photoz")
-    public Photo create(@RequestBody Photo photo){  //@whatever mark anotation,
+    public Photo create(@RequestBody @Validated Photo photo){  //@whatever mark anotation,
         // We should Generate the Id , in thr Backend
         String id =UUID.randomUUID().toString(); // --> to Google :)
         photo.setId(id);

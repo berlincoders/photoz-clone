@@ -1,8 +1,12 @@
 package com.berlincoders.romeo.photoz.clone;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class Photo {
 
     private String id;
+
+    @NotEmpty
     private String FileName;
 
     //raw data
