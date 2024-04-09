@@ -10,7 +10,7 @@ import java.util.*;
 
 public class PhotozController {
 
-    // what is a map in Java?
+    // what is a Map in Java?
     private Map<String, Photo> db = new HashMap<>() {{
         put("1", new Photo("1","hello.jpg"));
     }};
@@ -33,20 +33,27 @@ public class PhotozController {
         return photo;
     }
     // Delete one specific photo
-    //Ask the frontedn to send it some json, and spring boot will convert to a photo objet.
+
     @DeleteMapping ("/photoz/{id}")
-    public void   delete(@PathVariable String id){
+    public  void delete(@PathVariable String id){
         Photo photo = db.remove(id);
         if (photo == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    // Post mapping
-    @PostMapping Mapping ("/photoz/")
-    public void   create(@RequestBody Photo photo){
-        // We should generate the ID.
-        photo.setId(UUID.randomUUID().toString());
-        db.put(photo.getId(), photo);
-    }
+    // Post Mapping
+    // we wanted to request the frontend, to create some Json (create(Photo photo)), and then spring boot
+   // should convert that json to an Object, (Photo object defined before as a Model), and we can handle the object directly
 
+    @PostMapping ("/photoz")
+    public Photo create(@RequestBody Photo photo){  //@whatever mark anotation,
+        // We should Generate the Id , in thr Backend
+        String id =UUID.randomUUID().toString(); // --> to Google :)
+        photo.setId(id);
+
+        // Store the photo in the map
+         db.put(id, photo);
+
+      return photo;
+    }
 
 }
